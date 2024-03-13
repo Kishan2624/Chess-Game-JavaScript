@@ -42,6 +42,15 @@ function drop(ev) {
   const piece = document.getElementById(data);
   const destinationSquare = ev.currentTarget;
   const destinationSquareId = destinationSquare.id;
-  destinationSquare.appendChild(piece);
+  try{
+    destinationSquare.appendChild(piece);
   isWhiteTurn = !isWhiteTurn;
+  }catch(error){
+    if(isWhiteTurn){
+        console.log("It is White Turn")
+    }else{
+        console.log("It is Black Turn")
+    }
+  }
+  
 }
