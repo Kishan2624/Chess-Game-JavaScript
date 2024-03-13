@@ -1,5 +1,7 @@
 import * as help from "../Helper/constant.js"
 
+let isWhiteTurn = true
+
 export function setupBoardSquares(){
     for(let i=0 ; i<help.boardSquares.length;i++){
         help.boardSquares[i].addEventListener("dragover",allowDrop);
@@ -12,6 +14,7 @@ export function setupPieces(){
     for(let i=0;i<help.pieces.length;i++){
         help.pieces[i].addEventListener("dragstart",drag);
         help.pieces[i].setAttribute("draggable",true);
+        help.pieces[i].id = help.pieces[i].className.split(" ")+help.pieces[i].parentElement.id
 
     }
     for(let i=0;i<help.piecesImages.length;i++){
@@ -25,7 +28,11 @@ function allowDrop(ev){
 
 function drag(ev){
     const piece = ev.target;
-    ev.dataTransfer.setData("text",piece.id);
+    const pieceColor = piece.getAttribute("color")
+    if((isWhiteTurn && pieceColor == "white") || (!isWhiteTurn && pieceColor == "black")){
+        ev.dataTransfer.setData("text",piece.id);
+    }
+    
 }
 
 function drop(ev){
@@ -34,6 +41,6 @@ function drop(ev){
     const piece = document.getElementById(data);
     const destinationSquare= ev.currentTarget;
     const destinationSquareId = destinationSquare.id;
-    piece.querySelector("div").setAttribute("id",destinationSquareId)
-    destinationSquare.appendChild(piece.querySelector("div"));
+    destinationSquare.appendChild(piece);
+    isWhiteTurn = !isWhiteTurn;
 }

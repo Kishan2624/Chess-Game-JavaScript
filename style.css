@@ -40,6 +40,8 @@
 
   .piece{
     display: flex;
+    width: 6vw;
+    height: 6vw;
   }
   
   .black {
@@ -152,6 +154,12 @@
       width: 12vw;
       height: 12vw;
       object-fit: cover;
+    }
+
+    .piece{
+      display: flex;
+      width: 12vw;
+      height: 12vw;
     }
   
     .dot{

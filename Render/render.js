@@ -14,6 +14,12 @@ export function pieceRender(data) {
         const div = document.createElement("div")
         const img = document.createElement("img");
         div.id = square.id;
+        if(div.id[1] == "1" || div.id[1] == "2"){
+          div.setAttribute("color","white")
+        }
+        if(div.id[1] == "7" || div.id[1] == "8"){
+          div.setAttribute("color","black")
+        }
         div.classList.add("piece");
         img.src = square.piece.img;
         div.append(img);
